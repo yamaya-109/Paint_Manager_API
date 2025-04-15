@@ -16,8 +16,11 @@
 
 ## 環境設定
 spring.datasource.url=jdbc:postgresql://localhost:5432/paintdb
+
 spring.datasource.username=your_user
+
 spring.datasource.password=your_password
+
 jwt.secret=your_jwt_secret
 
 ##
