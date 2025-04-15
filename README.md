@@ -55,6 +55,7 @@ curl -X PUT "http://localhost:8080/api/paint/decrease/id" -H "Authorization: Bea
 
 
 ##今後の展望
+
   ・このAPIを使うWebアプリ開発
   
     ・ログイン機能はあるけどトークン毎回ペーストするのが面倒なのでアプリ側で吸収
