@@ -26,34 +26,34 @@ jwt.secret=your_jwt_secret
 ##
 テスト用コマンド一覧(DOS窓で叩いてね)
 
-✅ ログイン
+ログイン
 curl -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d "{\"username\":\"ユーザーネーム\",\"password\":\"パスワード\"}"
 
-✅ 全件取得
+全件取得
 curl http://localhost:8080/api/paint/all -H "Authorization: Bearer YOUR_TOKEN_HERE"
 
-✅ 塗料の追加
+塗料の追加
 curl -X POST http://localhost:8080/api/paint/add -H "Authorization: Bearer YOUR_TOKEN_HERE" -H "Content-Type: application/json" -d "{\"name\":\"ホワイト\",\"type\":\"アクリル\",\"category\":\"白系\",\"red\":255,\"green\":255,\"blue\":255,\"amount\":10}"
 
-✅ 名前で検索（完全一致）
+名前で検索（完全一致）
 curl --get "http://localhost:8080/api/paint/search/name" -H "Authorization: Bearer YOUR_TOKEN_HERE" --data-urlencode "name=ホワイト"
 
-✅ 名前で検索（部分一致）
+名前で検索（部分一致）
 curl --get "http://localhost:8080/api/paint/search/name_c" -H "Authorization: Bearer YOUR_TOKEN_HERE" --data-urlencode "name=ホワ"
 
-✅ カテゴリで検索
+カテゴリで検索
 curl --get "http://localhost:8080/api/paint/search/category" -H "Authorization: Bearer YOUR_TOKEN_HERE" --data-urlencode "category=白系"
 
-✅ 類似色検索
+類似色検索
 curl --get "http://localhost:8080/api/paint/similar" -H "Authorization: Bearer YOUR_TOKEN_HERE" --data-urlencode "r=255" --data-urlencode "g=255" --data-urlencode "b=255" --data-urlencode "margin=10"
 
-✅ 名前指定で削除
+名前指定で削除
 curl -X DELETE "http://localhost:8080/api/paint/delete/name" -H "Authorization: Bearer YOUR_TOKEN_HERE" --data-urlencode "name=ホワイト"
 
-✅ 全件削除
+全件削除
 curl -X DELETE http://localhost:8080/api/paint/delete/all -H "Authorization: Bearer YOUR_TOKEN_HERE"
 
-✅ 使用量を ID で減らす（例：ID=1、-3ml 減らす）
+使用量を ID で減らす（例：ID=1、-3ml 減らす）
 curl -X PUT "http://localhost:8080/api/paint/decrease/id" -H "Authorization: Bearer YOUR_TOKEN_HERE" --data-urlencode "id=1" --data-urlencode "amount=-3"
 
 
