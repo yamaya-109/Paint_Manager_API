@@ -19,53 +19,52 @@ import com.example.paintapi.util.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
-public class SecurityConfig 
-{
+public class SecurityConfig {
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
 
     //コンストラクタ注入を行う事
-    public SecurityConfig(
-            JwtUtil jwtUtil,
-            UserDetailsService userDetailsService
-        ) {
-            this.jwtUtil = jwtUtil;
-            this.userDetailsService = userDetailsService;
-         }
+    public SecurityConfig(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
+        this.jwtUtil = jwtUtil;
+        this.userDetailsService = userDetailsService;
+    }
+
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter(jwtUtil, userDetailsService);
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
     @Bean
-    public BCryptPasswordEncoder passwordEncoder()
-    {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
-    public AuthenticationProvider authenticationProvider()
-    {
-        DaoAuthenticationProvider authProvider =new DaoAuthenticationProvider();
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-    
+
     @SuppressWarnings("removal")
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-       return http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth->auth.requestMatchers("/api/path/**").permitAll().
-                requestMatchers("/api/paint/**").authenticated()
-                .anyRequest().permitAll())
-        .exceptionHandling(exception -> 
-        exception.authenticationEntryPoint((request, response, authException) -> {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-        })
-    ).sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authenticationProvider(authenticationProvider())
-        .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).build();
-    }  
+        return http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/path/**").permitAll()
+                        .requestMatchers("/api/paint/**").authenticated()
+                        .anyRequest().permitAll())
+                .exceptionHandling(
+                        exception -> exception.authenticationEntryPoint((request, response, authException) -> {
+                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                        }))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).build();
+    }
 }

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/paint")
 public class PaintmatcherApplicationController {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PaintmatcherApplicationController.class, args);
-	}
-	
-	 @GetMapping(value="/")
-	 public String index() {
-	   return "アクセス成功です";
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PaintmatcherApplicationController.class, args);
+    }
+
+    @GetMapping(value = "/")
+    public String index() {
+        return "アクセス成功です";
+    }
 
 }

@@ -1,13 +1,16 @@
 package com.example.paintapi.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserDto
-{
+public class UserDto {
     private String username;
     private String password;
 }

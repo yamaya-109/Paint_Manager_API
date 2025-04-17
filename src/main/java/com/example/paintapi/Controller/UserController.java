@@ -12,17 +12,16 @@ import com.example.paintapi.user.User;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController
-{
+public class UserController {
     private UserService userService;
-    
-    public  UserController(UserService uService) {
+
+    public UserController(UserService uService) {
         this.userService = uService;
     }
+
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody UserDto dto)
-    {
-        User app_user =userService.register(dto);
+    public ResponseEntity<User> register(@RequestBody UserDto dto) {
+        User app_user = userService.register(dto);
         return ResponseEntity.ok(app_user);
     }
 }
