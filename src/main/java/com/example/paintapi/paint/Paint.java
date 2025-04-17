@@ -15,6 +15,10 @@ import jakarta.persistence.Table;
 @Table(name = "paint")
 public class Paint {
 
+    public Paint() {
+
+    }
+
     public Paint(String name, String type, String category, int red, int green, int blue, int amount, User user) {
         this.name = name;
         this.type = type;
@@ -23,8 +27,9 @@ public class Paint {
         this.green = green;
         this.blue = blue;
         this.amount = amount;
-        this.ownUser = user;
+        this.user = user;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -45,51 +50,50 @@ public class Paint {
     private String type;
 
     @Column(nullable = false)
-    private int amount = 0;  // デフォルト0（ml）
+    private int amount = 0; // デフォルト0（ml）
 
     @Column(length = 50)
     private String category;
-    
+
     @ManyToOne
-    @JoinColumn(name ="user_id")
-    private User ownUser;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     // --- Getter & Setter ---
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public String getName() {
+        return name;
+    }
 
-    public String getName() { return name; }
+    public int getRed() {
+        return red;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public int getGreen() {
+        return green;
+    }
 
-    public int getRed() { return red; }
+    public int getBlue() {
+        return blue;
+    }
 
-    public void setRed(int red) { this.red = red; }
+    public String getType() {
+        return type;
+    }
 
-    public int getGreen() { return green; }
+    public int getAmount() {
+        return amount;
+    }
 
-    public void setGreen(int green) { this.green = green; }
+    public String getCategory() {
+        return category;
+    }
 
-    public int getBlue() { return blue; }
-
-    public void setBlue(int blue) { this.blue = blue; }
-
-    public String getType() { return type; }
-
-    public void setType(String type) { this.type = type; }
-
-    public int getAmount() { return amount; }
-
-    public void setAmount(int amount) { this.amount = amount; }
-
-    public String getCategory() { return category; }
-
-    public void setCategory(String category) { this.category = category; }
-    
-    public User getOownUser() { return ownUser; }
-
-    public void setOownUser(User user) { this.ownUser = user; }
-
+    public User getUser() {
+        return user;
+    }
 }

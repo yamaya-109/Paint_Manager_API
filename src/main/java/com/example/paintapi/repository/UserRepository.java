@@ -11,8 +11,7 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface UserRepository extends JpaRepository<User, Long> 
-{
+public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserName(String username);
 
 }
